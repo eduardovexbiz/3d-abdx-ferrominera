@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Protector Válvula ABDX</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: workshop viewer — 3D stage fills the screen, a control rail on the right (stacks under the stage on phones) */
+:root{
+  --bg:#eceef0; --panel:#ffffff; --ink:#1b1f24; --muted:#5d6670; --line:#d3d8dd;
+  --accent:#d99a00; --accent-ink:#1b1f24; --scene:#dfe3e7; --grid:#b9c0c8; --chip:#f3f5f7;
+  --display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14171a; --panel:#1d2125; --ink:#e7eaed; --muted:#9aa4ad; --line:#30363c;
+  --accent:#f2b51c; --accent-ink:#14171a; --scene:#202429; --grid:#3a4148; --chip:#262b30; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14171a; --panel:#1d2125; --ink:#e7eaed; --muted:#9aa4ad; --line:#30363c;
+  --accent:#f2b51c; --accent-ink:#14171a; --scene:#202429; --grid:#3a4148; --chip:#262b30; color-scheme:dark}
+html,body{height:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:15px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px;box-sizing:border-box}
+.app{display:grid;grid-template-columns:minmax(0,1fr) 320px;grid-template-rows:auto minmax(0,1fr);gap:12px;height:100%}
+header{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px}
+h1{font-size:22px;font-weight:700;margin:0;letter-spacing:.01em;text-wrap:balance}
+h1 span{color:var(--muted);font-weight:500}
+.tag{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.stage{position:relative;min-height:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--scene)}
+#c{display:block;width:100%;height:100%;touch-action:none}
+.hint{position:absolute;left:10px;bottom:8px;font-size:12px;color:var(--muted);pointer-events:none}
+.views{position:absolute;top:10px;left:10px;display:flex;gap:6px;flex-wrap:wrap}
+.views button{font:500 12px var(--mono);padding:5px 9px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:var(--ink);cursor:pointer}
+aside{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px;overflow:auto;display:flex;flex-direction:column;gap:16px;min-height:0}
+.group{display:flex;flex-direction:column;gap:8px}
+.label{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{font:600 14px var(--display);padding:8px 6px;border:0;background:var(--chip);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px}
+input[type=range]{width:150px;accent-color:var(--accent)}
+.btn{font:600 14px var(--display);padding:9px 10px;border:1px solid var(--ink);border-radius:5px;background:transparent;color:var(--ink);cursor:pointer}
+.btn:hover{background:var(--chip)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.specs{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px;margin:0}
+.specs dt{color:var(--muted)} .specs dd{margin:0;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+.note{font-size:13px;color:var(--muted);line-height:1.45;margin:0}
+.legend{display:flex;flex-direction:column;gap:5px;font-size:13px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:7px;vertical-align:-1px;border:1px solid var(--line)}
+@media (max-width:760px){
+  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 62vh auto;height:auto}
+  aside{overflow:visible}
+}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+</style>
+
+<div class="app">
+  <header>
+    <h1>Protector antirrobo <span>· válvula de control ABDX</span></h1>
+    <div class="tag">PAV-ABDX-001 · Rev C · soldado al soporte · medidas en mm</div>
+  </header>
+
+  <div class="stage">
+    <canvas id="c" aria-label="Modelo 3D del soporte de la válvula de control con sus dos protectores soldados"></canvas>
+    <div class="views" role="group" aria-label="Vistas">
+      <button id="v-iso">Iso</button><button id="v-front">Frente</button><button id="v-top">Planta</button><button id="v-side">Lado</button><button id="v-back">Atrás</button>
+    </div>
+    <div class="hint">Arrastra para girar · rueda o pellizco para acercar · clic derecho o dos dedos para mover</div>
+  </div>
+
+  <aside>
+    <div class="group">
+      <div class="label">Ver</div>
+      <div class="row"><label for="lid">Tapa superior</label><input id="lid" type="checkbox" checked></div>
+      <div class="row"><label for="dims">Cotas</label><input id="dims" type="checkbox" checked></div>
+      <div class="row"><label for="op">Transparencia</label><input id="op" type="range" min="0" max="90" value="35"></div>
+      <div class="row"><span>Color</span>
+        <div class="seg" role="group" aria-label="Color" style="width:150px"><button id="c-y" aria-pressed="true">Amarillo</button><button id="c-k" aria-pressed="false">Negro</button></div>
+      </div>
+      <button class="btn" id="explode">Separar protectores del soporte</button>
+    </div>
+
+    <div class="group">
+      <div class="label">CP-01 · Porción de servicio</div>
+      <dl class="specs">
+        <dt>Saliente</dt><dd>230</dd>
+        <dt>Largo</dt><dd>330 (a lo largo del soporte)</dd>
+        <dt>Alto</dt><dd>270</dd>
+        <dt>Pared trasera</dt><dd>200 (queda paso de 30)</dd>
+        <dt>Pieza junto al soporte</dt><dd>125 (por confirmar)</dd>
+      </dl>
+    </div>
+    <div class="group">
+      <div class="label">CP-02 · Porción de emergencia</div>
+      <dl class="specs">
+        <dt>Saliente</dt><dd>230 + 50 hasta el soporte</dd>
+        <dt>Largo</dt><dd>200</dd>
+        <dt>Alto</dt><dd>270</dd>
+        <dt>Pared trasera</dt><dd>150</dd>
+        <dt>Esquinas exteriores</dt><dd>redondeadas</dd>
+      </dl>
+    </div>
+    <div class="group">
+      <div class="label">Ambos</div>
+      <dl class="specs">
+        <dt>Unión</dt><dd>soldada al soporte, sin pernos</dd>
+        <dt>Tapa</dt><dd>plancha superior soldada</dd>
+        <dt>Fondo</dt><dd>ranurado (escape y drenaje)</dd>
+        <dt>Plancha</dt><dd>4 · A36 / Q235B</dd>
+      </dl>
+    </div>
+
+    <div class="group">
+      <div class="label">Piezas</div>
+      <div class="legend">
+        <span><i style="background:#8c939b"></i>Soporte de la válvula (existente)</span>
+        <span><i style="background:#3b4148"></i>Porciones de servicio y emergencia</span>
+        <span><i style="background:#6f7378"></i>Tuberías (existentes)</span>
+        <span><i style="background:#c2551b"></i>Cordón de soldadura</span>
+        <span><i style="background:var(--accent)"></i>Protector a fabricar</span>
+      </div>
+    </div>
+    <p class="note">Por confirmar con Ali: qué es la pieza de 125 mm del lado de servicio, si los 50 mm de emergencia son la separación hasta el soporte, y si el fondo va cerrado con ranuras o abierto.</p>
+  </aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(35,1,10,20000);
+const controls=new THREE.OrbitControls(camera,canvas);
+controls.enableDamping=true; const TGT=new THREE.Vector3(0,150,0); controls.target.copy(TGT);
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x8a8f96,0.75));
+const sun=new THREE.DirectionalLight(0xffffff,0.75); sun.position.set(600,900,700); scene.add(sun);
+const fill=new THREE.DirectionalLight(0xffffff,0.3); fill.position.set(-700,300,-500); scene.add(fill);
+
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let grid, dimColor='#1b1f24';
+function applyTheme(){
+  scene.background=new THREE.Color(css('--scene'));
+  if(grid) scene.remove(grid);
+  grid=new THREE.GridHelper(1600,32,new THREE.Color(css('--grid')),new THREE.Color(css('--grid')));
+  grid.position.y=-30; grid.material.transparent=true; grid.material.opacity=.55; scene.add(grid);
+  dimColor=css('--ink'); rebuildDims();
+}
+const mq=matchMedia('(prefers-color-scheme: dark)'); mq.addEventListener&&mq.addEventListener('change',applyTheme);
+new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+// ---------- materials ----------
+const mBracket=new THREE.MeshStandardMaterial({color:0x8c939b,metalness:.35,roughness:.6});
+const mValve=new THREE.MeshStandardMaterial({color:0x3b4148,metalness:.4,roughness:.5});
+const mPipe=new THREE.MeshStandardMaterial({color:0x6f7378,metalness:.5,roughness:.45});
+const mWeld=new THREE.MeshStandardMaterial({color:0xc2551b,metalness:.3,roughness:.7});
+const YEL=0xe0a414, BLK=0x2b2e33;
+const mGuard=new THREE.MeshStandardMaterial({color:YEL,metalness:.2,roughness:.55,transparent:true,opacity:.65,side:THREE.DoubleSide,depthWrite:false});
+const mEdge=new THREE.LineBasicMaterial({color:0x1b1f24,transparent:true,opacity:.75});
+
+function box(w,h,d,mat,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);return m;}
+function cyl(r,h,mat,axis){const g=new THREE.CylinderGeometry(r,r,h,24);if(axis==='x')g.rotateZ(Math.PI/2);if(axis==='z')g.rotateX(Math.PI/2);return new THREE.Mesh(g,mat);}
+function edged(mesh){mesh.add(new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry,20),mEdge));return mesh;}
+
+// ---------- geometry (mm). Front = +Z, up = +Y ----------
+const T=4, H=270, Y0=15;
+const BX=75, BZ=165, BH=300;               // soporte: 150 x 330 en planta, 300 alto
+// CP-01 servicio (+X)
+const S={x0:BX, out:230, z0:-165, z1:165, back:200};
+// CP-02 emergencia (−X)
+const E={neck:50, out:230, z0:-35, z1:165, back:150, R:30};
+
+// ---------- existing parts ----------
+const base=new THREE.Group(); scene.add(base);
+base.add(edged(box(2*BX,BH,2*BZ,mBracket,0,BH/2,0)));
+[[-40,60],[0,60],[40,60],[-25,240],[25,240]].forEach(([x,y])=>{const p=cyl(10,260,mPipe,'z');p.position.set(x,y,-BZ-130);base.add(p);});
+// service portion
+base.add(edged(box(150,220,170,mValve,BX+75,150,0)));
+const sc1=cyl(55,30,mValve,'x'); sc1.position.set(BX+165,190,0); base.add(sc1);
+const sc2=cyl(35,30,mValve,'x'); sc2.position.set(BX+165,95,0); base.add(sc2);
+// emergency portion + vent valve
+base.add(edged(box(140,210,160,mValve,-BX-70,160,65)));
+const ec1=cyl(50,30,mValve,'x'); ec1.position.set(-BX-155,190,65); base.add(ec1);
+const vent=cyl(28,36,mValve); vent.position.set(-BX-90,37,80); base.add(vent);
+
+// ---------- guard helpers ----------
+function wall(len,x,z,alongX,g){ // vertical plate, thickness T
+  const m=box(alongX?len:T,H,alongX?T:len,mGuard,x,Y0+H/2,z); m.renderOrder=2; edged(m); g.add(m); return m;}
+function arcWall(cx,cz,R,thetaStart,g){
+  const geo=new THREE.CylinderGeometry(R,R,H,16,1,true,thetaStart,Math.PI/2);
+  const m=new THREE.Mesh(geo,mGuard); m.position.set(cx,Y0+H/2,cz); m.renderOrder=2; edged(m); g.add(m);}
+function planShape(x0,x1,z0,z1,rOuterSide,R){ // shape in (u=x, v=z); rounded corners on the x1 end if R
+  const s=new THREE.Shape();
+  if(!R){s.moveTo(x0,z0);s.lineTo(x1,z0);s.lineTo(x1,z1);s.lineTo(x0,z1);s.lineTo(x0,z0);return s;}
+  const d=Math.sign(x1-x0);
+  s.moveTo(x0,z0); s.lineTo(x1-d*R,z0); s.quadraticCurveTo(x1,z0,x1,z0+R); s.lineTo(x1,z1-R); s.quadraticCurveTo(x1,z1,x1-d*R,z1); s.lineTo(x0,z1); s.lineTo(x0,z0); return s;}
+function slab(shape,yTop,g,hidden){
+  const geo=new THREE.ExtrudeGeometry(shape,{depth:T,bevelEnabled:false,curveSegments:10}); geo.rotateX(Math.PI/2);
+  const m=new THREE.Mesh(geo,mGuard); m.position.y=yTop; m.renderOrder=2; edged(m); g.add(m); return m;}
+function slots(shape,cx,cz,pitch){
+  for(const k of [-1,0,1]){const p=new THREE.Path(); p.absarc(cx+54,cz+k*pitch,6,-Math.PI/2,Math.PI/2,false); p.absarc(cx-54,cz+k*pitch,6,Math.PI/2,Math.PI*1.5,false); shape.holes.push(p);} }
+function weld(len,x,y,z,axis,g){const w=cyl(3.2,len,mWeld,axis); w.position.set(x,y,z); g.add(w);}
+
+const lids=[];
+// CP-01 service
+function serviceGuard(){
+  const g=new THREE.Group(); const xo=S.x0+S.out;
+  wall(S.out,(S.x0+xo)/2,S.z1-T/2,true,g);                  // front wall, full 230
+  wall(S.back,xo-S.back/2,S.z0+T/2,true,g);                 // back wall 200 from outer end
+  wall(S.z1-S.z0,xo-T/2,(S.z0+S.z1)/2,false,g);             // outer cap 330
+  const lidS=planShape(S.x0,xo,S.z0,S.z1); lids.push(slab(lidS,Y0+H,g));
+  const bot=planShape(S.x0,xo,S.z0,S.z1); slots(bot,(S.x0+xo)/2+10,0,60); slab(bot,Y0+T,g);
+  // weld beads against the soporte
+  weld(H,S.x0+3,Y0+H/2,S.z1-3,'y',g);                       // front wall to soporte
+  weld(S.z1-S.z0,S.x0+3,Y0+H+2,0,'z',g);                    // lid to soporte
+  weld(S.z1-S.z0,S.x0+3,Y0+2,0,'z',g);                      // bottom to soporte
+  g.userData.dir=1; return g;
+}
+// CP-02 emergency
+function emergencyGuard(){
+  const g=new THREE.Group(); const xi=-BX, xb=-BX-E.neck, xo=xb-E.out, R=E.R;
+  wall(xi-(xo+R),(xi+xo+R)/2,E.z1-T/2,true,g);              // front wall incl. 50 neck, up to corner
+  const backStart=xo+R, backEnd=xo+E.back;
+  wall(backEnd-backStart,(backStart+backEnd)/2,E.z0+T/2,true,g); // back wall 150 from outer end
+  wall((E.z1-E.z0)-2*R,xo+T/2,(E.z0+E.z1)/2,false,g);       // outer cap
+  arcWall(xo+R,E.z1-R,R,1.5*Math.PI,g); arcWall(xo+R,E.z0+R,R,Math.PI,g);
+  const lidE=planShape(xi,xo,E.z0,E.z1,true,R); lids.push(slab(lidE,Y0+H,g));
+  const bot=planShape(xi,xo,E.z0,E.z1,true,R); slots(bot,(xb+xo)/2,(E.z0+E.z1)/2,50); slab(bot,Y0+T,g);
+  weld(H,xi-3,Y0+H/2,E.z1-3,'y',g);
+  weld(E.z1-E.z0,xi-3,Y0+H+2,(E.z0+E.z1)/2,'z',g);
+  weld(E.z1-E.z0,xi-3,Y0+2,(E.z0+E.z1)/2,'z',g);
+  g.userData.dir=-1; return g;
+}
+const gS=serviceGuard(), gE=emergencyGuard(); scene.add(gS,gE);
+
+// ---------- dimensions ----------
+const dimGroup=new THREE.Group(); scene.add(dimGroup);
+function textSprite(txt){
+  const c=document.createElement('canvas'); const ctx=c.getContext('2d'); const fs=52;
+  ctx.font=`600 ${fs}px "IBM Plex Mono", monospace`; const w=Math.ceil(ctx.measureText(txt).width)+26;
+  c.width=w; c.height=fs+22; ctx.font=`600 ${fs}px "IBM Plex Mono", monospace`;
+  ctx.fillStyle=css('--panel'); ctx.globalAlpha=.9; ctx.fillRect(0,0,c.width,c.height); ctx.globalAlpha=1;
+  ctx.fillStyle=dimColor; ctx.textBaseline='middle'; ctx.fillText(txt,13,c.height/2+2);
+  const tex=new THREE.CanvasTexture(c); tex.minFilter=THREE.LinearFilter;
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,depthTest:false})); sp.renderOrder=10;
+  const k=0.36; sp.scale.set(c.width*k,c.height*k,1); return sp;
+}
+function dimLine(a,b,txt,off){
+  const A=new THREE.Vector3(...a), B=new THREE.Vector3(...b), o=new THREE.Vector3(...off);
+  const A2=A.clone().add(o), B2=B.clone().add(o), ext=o.clone().setLength(8);
+  const col=new THREE.Color(dimColor);
+  const ls=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([A,A2.clone().add(ext),B,B2.clone().add(ext),A2,B2]),new THREE.LineBasicMaterial({color:col,depthTest:false}));
+  ls.renderOrder=9; dimGroup.add(ls);
+  const dir=B2.clone().sub(A2).normalize();
+  for(const [p,s] of [[A2,1],[B2,-1]]){const cone=new THREE.Mesh(new THREE.ConeGeometry(3.5,12,10),new THREE.MeshBasicMaterial({color:col,depthTest:false}));
+    cone.position.copy(p.clone().add(dir.clone().multiplyScalar(6*s))); cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir.clone().multiplyScalar(-s)); cone.renderOrder=9; dimGroup.add(cone);}
+  const sp=textSprite(txt); sp.position.copy(A2.clone().add(B2).multiplyScalar(.5).add(o.clone().setLength(18))); dimGroup.add(sp);
+}
+let exploded=0;
+function rebuildDims(){
+  while(dimGroup.children.length){const c=dimGroup.children.pop(); c.geometry&&c.geometry.dispose(); c.material&&c.material.map&&c.material.map.dispose();}
+  const es=exploded*240, top=Y0+H;
+  // service
+  const sx0=S.x0+es, sxo=S.x0+S.out+es;
+  dimLine([sx0,top,S.z1],[sxo,top,S.z1],'230',[0,0,45]);
+  dimLine([sxo,top,S.z1],[sxo,top,S.z0],'330',[45,0,0]);
+  dimLine([sxo-S.back,top,S.z0],[sxo,top,S.z0],'200',[0,0,-45]);
+  dimLine([sxo,Y0,S.z1],[sxo,top,S.z1],'270',[40,0,40]);
+  // emergency
+  const xi=-BX-es, xb=xi-E.neck, xo=xb-E.out;
+  dimLine([xb,top,E.z1],[xo,top,E.z1],'230',[0,0,45]);
+  dimLine([xi,top,E.z1],[xb,top,E.z1],'50',[0,0,45]);
+  dimLine([xo,top,E.z1],[xo,top,E.z0],'200',[-45,0,0]);
+  dimLine([xo,top,E.z0],[xo+E.back,top,E.z0],'150',[0,0,-45]);
+  dimLine([xo,Y0,E.z1],[xo,top,E.z1],'270',[-40,0,40]);
+  dimGroup.visible=document.getElementById('dims').checked;
+}
+
+// ---------- UI ----------
+const $=id=>document.getElementById(id);
+function setOpacity(){mGuard.opacity=1-$('op').value/100; mGuard.depthWrite=mGuard.opacity>.97; mGuard.needsUpdate=true;}
+$('op').oninput=setOpacity;
+$('dims').onchange=()=>{dimGroup.visible=$('dims').checked;};
+$('lid').onchange=()=>{lids.forEach(l=>l.visible=$('lid').checked);};
+function setColor(c){mGuard.color.setHex(c==='y'?YEL:BLK); $('c-y').setAttribute('aria-pressed',c==='y'); $('c-k').setAttribute('aria-pressed',c==='k'); mEdge.color.setHex(c==='y'?0x1b1f24:0x9aa4ad);}
+$('c-y').onclick=()=>setColor('y'); $('c-k').onclick=()=>setColor('k');
+let expTarget=0; const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function place(){gS.position.x=exploded*240; gE.position.x=-exploded*240;}
+$('explode').onclick=()=>{expTarget=expTarget?0:1; $('explode').textContent=expTarget?'Unir protectores al soporte':'Separar protectores del soporte'; if(reduce){exploded=expTarget;place();rebuildDims();}};
+
+let camAnim=null;
+function goView(pos){const to=new THREE.Vector3(...pos); if(reduce){camera.position.copy(to);controls.target.copy(TGT);return;}
+  camAnim={from:camera.position.clone(),to,t:0,tf:controls.target.clone()};}
+const V={iso:[700,620,900],front:[0,150,1300],top:[0,1500,1],side:[1300,150,0],back:[-650,450,-950]};
+for(const k of Object.keys(V)) $('v-'+k).onclick=()=>goView(V[k]);
+camera.position.set(...V.iso);
+
+function resize(){const r=canvas.parentElement.getBoundingClientRect(); renderer.setSize(r.width,r.height,false); camera.aspect=r.width/Math.max(1,r.height); camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(canvas.parentElement);
+
+applyTheme(); setOpacity(); resize();
+document.fonts&&document.fonts.ready.then(rebuildDims);
+function tick(){
+  if(Math.abs(exploded-expTarget)>0.001){exploded+=(expTarget-exploded)*0.12; if(Math.abs(exploded-expTarget)<0.002)exploded=expTarget; place(); rebuildDims();}
+  if(camAnim){camAnim.t=Math.min(1,camAnim.t+0.06); const k=1-Math.pow(1-camAnim.t,3);
+    camera.position.lerpVectors(camAnim.from,camAnim.to,k); controls.target.lerpVectors(camAnim.tf,TGT,k); if(camAnim.t>=1)camAnim=null;}
+  controls.update(); renderer.render(scene,camera); requestAnimationFrame(tick);
+}
+tick();
+})();
+</script>
+
+</body>
+</html>
